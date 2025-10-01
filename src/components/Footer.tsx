@@ -15,7 +15,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Your trusted companion for discovering and managing amazing events.
+              Professional event planning and vendor services for your special moments.
             </p>
           </div>
 
@@ -30,12 +30,12 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/events" className="text-muted-foreground hover:text-primary transition-colors">
-                  Events
+                  Portfolio
                 </Link>
               </li>
               <li>
                 <Link to="/register" className="text-muted-foreground hover:text-primary transition-colors">
-                  Register
+                  Book Event
                 </Link>
               </li>
             </ul>

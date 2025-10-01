@@ -11,8 +11,8 @@ const Navigation = () => {
 
   const navLinks = [
     { path: "/", label: "Home" },
-    { path: "/events", label: "Events" },
-    { path: "/register", label: "Register" },
+    { path: "/events", label: "Portfolio" },
+    { path: "/register", label: "Book Event" },
   ];
 
   return (
@@ -41,7 +41,7 @@ const Navigation = () => {
               </Link>
             ))}
             <Button asChild variant="hero" size="sm">
-              <Link to="/register">Get Started</Link>
+              <Link to="/register">Book Now</Link>
             </Button>
           </div>
 
@@ -75,7 +75,7 @@ const Navigation = () => {
             <div className="pt-2">
               <Button asChild variant="hero" size="sm" className="w-full">
                 <Link to="/register" onClick={() => setIsOpen(false)}>
-                  Get Started
+                  Book Now
                 </Link>
               </Button>
             </div>
