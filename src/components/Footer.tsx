@@ -29,8 +29,23 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li>
                 <Link to="/events" className="text-muted-foreground hover:text-primary transition-colors">
                   Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                  Contact
                 </Link>
               </li>
               <li>
@@ -47,15 +62,24 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary" />
-                <a href="mailto:info@eventify.com" className="hover:text-primary transition-colors">
-                  info@eventify.com
+                <a href="mailto:hello@eventify.com" className="hover:text-primary transition-colors">
+                  hello@eventify.com
                 </a>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
-                <a href="tel:+1234567890" className="hover:text-primary transition-colors">
-                  +1 (234) 567-890
+                <a href="tel:+923115637682" className="hover:text-primary transition-colors">
+                  0311 5637682
                 </a>
+              </li>
+              <li className="flex items-center gap-2 text-muted-foreground">
+                <Phone className="h-4 w-4 text-primary" />
+                <a href="tel:+923123456679" className="hover:text-primary transition-colors">
+                  0312 3456679
+                </a>
+              </li>
+              <li className="text-muted-foreground">
+                Apara Market G-6, Islamabad
               </li>
             </ul>
           </div>

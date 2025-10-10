@@ -58,7 +58,7 @@ const Events = () => {
         <section className="py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Tabs defaultValue="all" className="w-full" onValueChange={setSelectedType}>
-              <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-3 lg:grid-cols-6 mb-12">
+              <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-4 lg:grid-cols-6 mb-12">
                 {eventTypes.map((type) => (
                   <TabsTrigger key={type} value={type} className="text-xs sm:text-sm">
                     {type === "all" ? "All Events" : type}
@@ -81,6 +81,7 @@ const Events = () => {
                   </div>
                 )}
               </TabsContent>
+
             </Tabs>
           </div>
         </section>

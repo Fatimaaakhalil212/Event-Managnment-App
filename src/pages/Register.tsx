@@ -57,20 +57,79 @@ const Register = () => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Booking data:", data);
+const onSubmit = async (data: FormValues) => {
+  console.log("📦 Booking data before sending:", data);
+
+  // Prepare payload for backend
+  const payload = {
+    name: data.name,
+    email: data.email,
+    phone_number: data.phone,
+    event_type: data.eventType,
+    event_date: data.eventDate ? data.eventDate.toISOString().split("T")[0] : null,
+    event_time: data.timeSlot,
+    guests_count: data.guestCount,
+    venue_location: data.venue,
+    decoration_style: data.decorationType,
+    catering_option: data.catering,
+    special_requests: data.specialRequests || "",
+  };
+
+  try {
+    console.log("🚀 Attempting to send request to:", "http://localhost:5000/api/bookings");
+    console.log("📦 Payload being sent:", payload);
     
-    toast({
-      title: "Booking Request Received!",
-      description: `Thank you! We've received your booking request for ${format(data.eventDate, "PPP")}. Our team will contact you within 24 hours at ${data.email}`,
+    const res = await fetch("http://localhost:5000/api/bookings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
     
-    setIsSubmitted(true);
-    form.reset();
-    setSelectedEventType("");
+    console.log("📡 Response received:", res);
+    console.log("📊 Response status:", res.status);
+    console.log("📊 Response ok:", res.ok);
+
+    const result = await res.json();
+    console.log("✅ Response from backend:", result);
+
+    if (res.ok) {
+      toast({
+        title: "Booking Request Submitted!",
+        description: `Thank you! We've received your booking for ${payload.event_date}. Our team will contact you at ${payload.email}`,
+      });
+
+      setIsSubmitted(true);
+      form.reset();
+      setSelectedEventType("");
+      setTimeout(() => setIsSubmitted(false), 7000);
+    } else {
+      toast({
+        title: "Submission Failed",
+        description: result.message || "Something went wrong while saving booking",
+        variant: "destructive",
+      });
+    }
+  } catch (err) {
+    console.error("❌ Error submitting booking:", err);
+    console.error("Error details:", {
+      message: err.message,
+      name: err.name,
+      stack: err.stack
+    });
     
-    setTimeout(() => setIsSubmitted(false), 7000);
-  };
+    let errorMessage = "Could not connect to server. Please try again later.";
+    if (err instanceof TypeError && err.message.includes("fetch")) {
+      errorMessage = "Network error: Unable to reach the server. Please check if the backend is running.";
+    }
+    
+    toast({
+      title: "Network Error",
+      description: errorMessage,
+      variant: "destructive",
+    });
+  }
+};
+
 
   const handleEventTypeChange = (value: string) => {
     setSelectedEventType(value);
@@ -153,7 +212,7 @@ const Register = () => {
                             <FormItem>
                               <FormLabel>Phone Number *</FormLabel>
                               <FormControl>
-                                <Input type="tel" placeholder="+1 (234) 567-8900" {...field} />
+                                <Input type="tel" placeholder="+92 123 4567894" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
