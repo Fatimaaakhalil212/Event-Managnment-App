@@ -1,20 +1,20 @@
-# Use official Node image
-FROM node:18
+# ---------- Stage 1: Backend Setup ----------
+FROM node:18-alpine
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /usr/src/app
 
-# Copy package files (relative to Dockerfile)
+# Copy package.json and package-lock.json for dependency installation
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the backend source code
+# Copy all backend code to the working directory
 COPY . .
 
-# Expose app port
+# Expose backend port (ensure it matches your server.js port)
 EXPOSE 5000
 
-# Start the app
-CMD ["npm", "start"]
+# Command to start the backend
+CMD ["node", "server.js"]
