@@ -1,48 +1,47 @@
-version: "3.8"
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: eventapp-backend-jenkins
+    container_name: eventapp-backend
     ports:
-      - "6000:5000"          # hostPort:containerPort -> changed to 6000
+      - "5000:5000"
     env_file:
       - ./backend/.env
     depends_on:
       - db
     networks:
-      - event-net-jenkins
+      - event-net
 
   frontend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: eventapp-frontend-jenkins
+    container_name: eventapp-frontend
     ports:
-      - "4000:80"            # hostPort:containerPort -> changed to 4000
+      - "3000:80"
     depends_on:
       - backend
     networks:
-      - event-net-jenkins
+      - event-net
 
   db:
     image: mysql:8.0
-    container_name: eventapp-db-jenkins
+    container_name: eventapp-db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: CUII@123456
       MYSQL_DATABASE: eventdb
     ports:
-      - "3309:3306"          # hostPort:containerPort -> changed to 3309
+      - "3307:3306"
     volumes:
-      - db_data_jenkins:/var/lib/mysql
+      - db_data:/var/lib/mysql
     networks:
-      - event-net-jenkins
+      - event-net
 
 volumes:
-  db_data_jenkins:
+  db_data:
 
 networks:
-  event-net-jenkins:
+  event-net:
+
