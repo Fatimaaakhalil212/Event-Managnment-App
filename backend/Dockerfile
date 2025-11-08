@@ -16,5 +16,13 @@ COPY . .
 # Expose backend port (ensure it matches your server.js port)
 EXPOSE 5000
 
+# Copy the wait-for-db script
+COPY wait-for-db.sh /wait-for-db.sh
+RUN chmod +x /wait-for-db.sh
+
+# Use the script to wait for DB before starting
+ENTRYPOINT ["/wait-for-db.sh", "npm", "start"]
+
+
 # Command to start the backend
 CMD ["node", "server.js"]
