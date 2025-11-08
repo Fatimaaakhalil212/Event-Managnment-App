@@ -22,7 +22,3 @@ RUN chmod +x /wait-for-db.sh
 
 # Use the script to wait for DB before starting
 ENTRYPOINT ["/wait-for-db.sh", "npm", "start"]
-
-
-# Command to start the backend
-CMD ["node", "server.js"]
